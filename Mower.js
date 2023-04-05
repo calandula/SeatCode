@@ -62,10 +62,11 @@ readline.question('', (upperRight) => {
     const instructions = [];
     readline.on('line', (line) => {
       if (line.trim() === '') {
-        const position = positions.pop();
-        const instruction = instructions.pop();
-        const final_position = simulateMower(position, instruction, grid);
-        console.log(final_position.join(' '));
+        positions.forEach((pos, i)=>{
+            const final_position = simulateMower(pos, instructions[i], grid);
+            console.log(final_position.join(' '));
+        })
+        readline.close()
       } else if (instructions.length === positions.length) {
         lineArr = line.trim().split(' ')
         positions.push([...lineArr.slice(0, 2).map(Number), lineArr[2]]);
